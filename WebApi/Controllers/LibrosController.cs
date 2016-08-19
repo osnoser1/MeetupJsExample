@@ -14,13 +14,29 @@ namespace WebApi.Controllers
         private readonly WebApiContext _db = new WebApiContext();
 
         // GET: api/Libros
-        public IQueryable<Libro> GetLibros() => _db.Libros.Include(l => l.Autor);
+        public IQueryable<LibroDto> GetLibros()
+            => from l in _db.Libros
+                select new LibroDto
+                {
+                    IdLibro = l.IdLibro,
+                    Titulo = l.Titulo,
+                    NombreAutor = l.Autor.Nombre
+                };
 
         // GET: api/Libros/5
         [ResponseType(typeof(Libro))]
         public async Task<IHttpActionResult> GetLibro(int id)
         {
-            var libro = await _db.Libros.FindAsync(id);
+            var libro = await _db.Libros.Select(l =>
+                new DetalleLibroDto
+                {
+                    IdLibro = l.IdLibro,
+                    Titulo = l.Titulo,
+                    Año = l.Año,
+                    Precio = l.Precio,
+                    Genero = l.Genero,
+                    NombreAutor = l.Autor.Nombre
+                }).FirstOrDefaultAsync(dto => dto.IdLibro == id);
             if (libro == null)
             {
                 return NotFound();
@@ -73,7 +89,14 @@ namespace WebApi.Controllers
             _db.Libros.Add(libro);
             await _db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new {id = libro.IdLibro}, libro);
+            var dto = new LibroDto
+            {
+                IdLibro = libro.IdLibro,
+                Titulo = libro.Titulo,
+                NombreAutor = libro.Autor.Nombre
+            };
+
+            return CreatedAtRoute("DefaultApi", new {id = libro.IdLibro}, dto);
         }
 
         // DELETE: api/Libros/5

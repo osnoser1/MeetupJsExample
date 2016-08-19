@@ -177,7 +177,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Autor.cs" />
+    <Compile Include="Models\DetalleLibroDto.cs" />
     <Compile Include="Models\Libro.cs" />
+    <Compile Include="Models\LibroDto.cs" />
     <Compile Include="Models\WebApiContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
