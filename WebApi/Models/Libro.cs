@@ -18,6 +18,6 @@ namespace WebApi.Models
 
         // Propiedad de navegación
         [ForeignKey("IdAutor")]
-        public Autor Autor { get; set; }
+        public /*virtual*/ Autor Autor { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace WebApi.Models
     
         public WebApiContext() : base("name=WebApiContext")
         {
+            Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
         public System.Data.Entity.DbSet<WebApi.Models.Autor> Autores { get; set; }

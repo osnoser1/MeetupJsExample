@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApi.Models
 {
@@ -9,5 +11,9 @@ namespace WebApi.Models
 
         [Required]
         public string Nombre { get; set; }
+
+        //[InverseProperty("Autor")]
+        //public ICollection<Libro> Libros { get; set; }
+
     }
 }

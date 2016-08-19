@@ -14,7 +14,7 @@ namespace WebApi.Controllers
         private readonly WebApiContext _db = new WebApiContext();
 
         // GET: api/Libros
-        public IQueryable<Libro> GetLibros() => _db.Libros;
+        public IQueryable<Libro> GetLibros() => _db.Libros.Include(l => l.Autor);
 
         // GET: api/Libros/5
         [ResponseType(typeof(Libro))]
