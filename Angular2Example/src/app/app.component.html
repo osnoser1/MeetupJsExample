@@ -1,3 +1,9 @@
-<h1>
-  {{title}}
-</h1>
+<h1>{{title}}</h1>
+<h2>Detalles de {{libro.titulo}}!</h2>
+<div>
+    <label>Id: </label>{{libro.idLibro}}
+</div>
+<div>
+    <label>Titulo: </label>
+    <input [(ngModel)]="libro.titulo" placeholder="Titulo">
+</div>
