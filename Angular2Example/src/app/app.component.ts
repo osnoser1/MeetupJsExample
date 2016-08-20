@@ -5,6 +5,13 @@ export class Libro {
     titulo: string;
 }
 
+const LIBROS: Libro[] = [
+    { idLibro: 11, titulo: 'Pride and Prejudic' },
+    { idLibro: 12, titulo: 'Northanger Abbey' },
+    { idLibro: 13, titulo: 'David Copperfield' },
+    { idLibro: 14, titulo: 'Don Quixote' }
+];
+
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
@@ -12,8 +19,11 @@ export class Libro {
 })
 export class AppComponent {
     title = 'la aplicacion trabaja!';
-    libro: Libro = {
-        idLibro: 1,
-        titulo: "Introduccion a Javascript",
-    };
+    libros = LIBROS;
+    libroSeleccionado: Libro;
+
+    onSelect(libro: Libro): void {
+        this.libroSeleccionado = libro;
+    }
+
 }

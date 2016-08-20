@@ -1,9 +1,17 @@
-<h1>{{title}}</h1>
-<h2>Detalles de {{libro.titulo}}!</h2>
-<div>
-    <label>Id: </label>{{libro.idLibro}}
-</div>
-<div>
-    <label>Titulo: </label>
-    <input [(ngModel)]="libro.titulo" placeholder="Titulo">
+<h2>Mis libros</h2>
+<ul class="libros">
+    <li *ngFor="let libro of libros"
+        [class.selected]="libro === libroSeleccionado"
+        (click)="onSelect(libro)">
+        <span class="badge">{{libro.idLibro}}</span> {{libro.titulo}}
+    </li>
+</ul>
+<div *ngIf="libroSeleccionado">
+    <h2>Detalles de {{libroSeleccionado.titulo}}!</h2>
+    <div><label>Id: </label>{{libroSeleccionado.idLibro}}
+    </div>
+    <div>
+        <label>Titulo: </label>
+        <input [(ngModel)]="libroSeleccionado.titulo" placeholder="titulo"/>
+    </div>
 </div>
