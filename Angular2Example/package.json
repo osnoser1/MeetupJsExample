@@ -4,6 +4,9 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
+    "clean": "del /s /q wwwroot\\*",
+    "copy": "copy dist\\* wwwroot",
+    "build": "ng build --prod && npm run clean && npm run copy",
     "start": "ng serve",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
@@ -41,5 +44,6 @@
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
     "typescript": "^2.0.0"
-  }
+  },
+  "-vs-binding": { "BeforeBuild": [ "build" ] }
 }
