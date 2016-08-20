@@ -28,10 +28,9 @@ namespace Angular2Example
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            // Hay que agregar un paquete en la configuración de dependencias.
+            // Microsoft.AspNetCore.StaticFiles: "1.0.0"
+            app.UseStaticFiles();
         }
     }
 }
