@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-
-export class Libro {
-    idLibro: number;
-    titulo: string;
-}
+import { Libro } from './models/libro';
 
 const LIBROS: Libro[] = [
     { idLibro: 11, titulo: 'Pride and Prejudic' },

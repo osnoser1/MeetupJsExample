@@ -6,12 +6,4 @@
         <span class="badge">{{libro.idLibro}}</span> {{libro.titulo}}
     </li>
 </ul>
-<div *ngIf="libroSeleccionado">
-    <h2>Detalles de {{libroSeleccionado.titulo}}!</h2>
-    <div><label>Id: </label>{{libroSeleccionado.idLibro}}
-    </div>
-    <div>
-        <label>Titulo: </label>
-        <input [(ngModel)]="libroSeleccionado.titulo" placeholder="titulo"/>
-    </div>
-</div>
+<mi-libro-detalles [libro]="libroSeleccionado"></mi-libro-detalles>
