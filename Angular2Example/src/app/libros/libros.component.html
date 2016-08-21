@@ -1,0 +1,14 @@
+<h2>Mis libros</h2>
+<ul class="libros">
+    <li *ngFor="let libro of libros"
+        [class.selected]="libro === libroSeleccionado"
+        (click)="onSelect(libro)">
+        <span class="badge">{{libro.idLibro}}</span> {{libro.titulo}}
+    </li>
+</ul>
+<div *ngIf="libroSeleccionado">
+    <h2>
+        {{libroSeleccionado.titulo | uppercase}} es mi libro
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>

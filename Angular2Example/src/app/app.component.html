@@ -1,9 +1,6 @@
-<h2>Mis libros</h2>
-<ul class="libros">
-    <li *ngFor="let libro of libros"
-        [class.selected]="libro === libroSeleccionado"
-        (click)="onSelect(libro)">
-        <span class="badge">{{libro.idLibro}}</span> {{libro.titulo}}
-    </li>
-</ul>
-<app-libro-detalles [libro]="libroSeleccionado"></app-libro-detalles>
+<h1>{{titulo}}</h1>
+<nav>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/libros" routerLinkActive="active">Libros</a>
+</nav>
+<router-outlet></router-outlet>

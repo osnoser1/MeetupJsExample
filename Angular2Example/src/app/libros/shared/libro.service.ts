@@ -17,4 +17,7 @@ export class LibroService {
         );
     }
 
+    getLibro(id: number): Promise<Libro> {
+        return this.getLibros().then(libros => libros.find(libro => libro.idLibro === id));
+    }
 }
