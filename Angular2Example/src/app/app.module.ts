@@ -3,7 +3,7 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { LibroDetallesComponent } from './libro-detalles/libro-detalles.component';
+import { LibroDetallesComponent } from './libros/libro-detalles/libro-detalles.component';
 
 @NgModule({
   declarations: [
