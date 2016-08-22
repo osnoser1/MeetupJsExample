@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using System.Web.Http.Cors;
+using Newtonsoft.Json.Serialization;
 
 namespace WebApi
 {
@@ -10,6 +9,11 @@ namespace WebApi
         public static void Register(HttpConfiguration config)
         {
             // Configuración y servicios de API web
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
+                new CamelCasePropertyNamesContractResolver();
 
             // Rutas de API web
             config.MapHttpAttributeRoutes();
@@ -17,8 +21,8 @@ namespace WebApi
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+                defaults: new {id = RouteParameter.Optional}
+                );
         }
     }
 }

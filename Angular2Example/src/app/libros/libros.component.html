@@ -4,8 +4,14 @@
         [class.selected]="libro === libroSeleccionado"
         (click)="onSelect(libro)">
         <span class="badge">{{libro.idLibro}}</span> {{libro.titulo}}
+        <button class="delete-button" (click)="borrarLibro(libro, $event)">Borrar</button>
     </li>
 </ul>
+<div class="error" *ngIf="error">{{error}}</div>
+<button (click)="agregarLibro()">Agregar nuevo libro</button>
+<div *ngIf="agregandoLibro">
+    <app-libro-detalles (close)="close($event)"></app-libro-detalles>
+</div>
 <div *ngIf="libroSeleccionado">
     <h2>
         {{libroSeleccionado.titulo | uppercase}} es mi libro

@@ -1,23 +1,72 @@
 import { Injectable } from "@angular/core";
+import { Headers, Http, Response } from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
+
 import { Libro } from "./libro.model";
-import { libros } from "./mock-libros";
 
 @Injectable()
 export class LibroService {
 
-    constructor() {}
+    constructor(private http: Http) {}
 
-    getLibros(): Promise<Libro[]>{
-        return Promise.resolve(libros);;
+    private librosUrl = 'http://localhost:45886/api/libros'; // URL to web api
+
+    delete(libro: Libro): Promise<Response> {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        const url = `${this.librosUrl}/${libro.idLibro}`;
+
+        return this.http
+            .delete(url, { headers: headers })
+            .toPromise()
+            .catch(this.handleError);
     }
 
-    getLibrossSlowly(): Promise<Libro[]> {
-        return new Promise<Libro[]>(resolve =>
-            setTimeout(() => resolve(libros), 3000) // 2 seconds
-        );
+    getLibros = (): Promise<Libro[]> => this.http.get(this.librosUrl)
+        .toPromise()
+        .then(response => response.json() as Libro[])
+        .catch(this.handleError);
+
+    getLibro = (id: number): Promise<Libro> => this.http.get(`${this.librosUrl}/${id}`)
+        .toPromise()
+        .then(response => response.json() as Libro)
+        .catch(this.handleError);
+
+
+    save = (libro: Libro): Promise<Libro> => libro.idLibro ? this.put(libro) : this.post(libro);
+
+    private handleError(error: any): Promise<any> {
+        console.error('Un error ha ocurrido', error);
+        return Promise.reject(error.message || error);
     }
 
-    getLibro(id: number): Promise<Libro> {
-        return this.getLibros().then(libros => libros.find(libro => libro.idLibro === id));
+    // Add new Libro
+    private post(libro: Libro): Promise<Libro> {
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+
+        return this.http
+            .post(this.librosUrl, JSON.stringify(libro), { headers: headers })
+            .toPromise()
+            .then(res => res.json().data)
+            .catch(this.handleError);
     }
+
+    // Update existing Libro
+    private put(libro: Libro): Promise<Libro> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        let url = `${this.librosUrl}/${libro.idLibro}`;
+
+        return this.http
+            .put(url, JSON.stringify(libro), { headers: headers })
+            .toPromise()
+            .then(() => libro)
+            .catch(this.handleError);
+    }
+
 }
