@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Libro } from '../shared/libro.model';
-import { LibroService } from '../shared/libro.service';
+import { Libro, LibroService } from '../shared/index';
 
 @Component({
     selector: 'app-libro-detalles',
@@ -44,7 +43,7 @@ export class LibroDetallesComponent implements OnInit {
                 this.libro = libro; // saved hero, w/ id if new
                 this.goBack(this.libro);
             })
-            .catch(error => this.error = error)
+            .catch(error => this.error = error);
     }; // TODO: Display error message
 
 }

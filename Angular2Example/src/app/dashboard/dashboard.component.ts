@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LibroService } from '../libros/shared/libro.service';
-import { Libro } from '../libros/shared/libro.model';
+import { LibroBusquedaComponent } from '../libros/index'
+import { Libro, LibroService } from '../libros/shared/index';
 
 @Component({
     selector: 'app-dashboard',

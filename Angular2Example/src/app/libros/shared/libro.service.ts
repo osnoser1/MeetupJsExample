@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Headers, Http, Response } from '@angular/http';
+import { Observable } from 'rxjs';
 
-import 'rxjs/add/operator/toPromise';
-
-import { Libro } from "./libro.model";
+import { Libro } from "./index";
 
 @Injectable()
 export class LibroService {
@@ -36,6 +35,10 @@ export class LibroService {
 
 
     save = (libro: Libro): Promise<Libro> => libro.idLibro ? this.put(libro) : this.post(libro);
+
+    search = (term: string): Observable<Libro[]> => this.http
+            .get(`${this.librosUrl}?nombre=${term}`)
+            .map((r: Response) => r.json() as Libro[]);
 
     private handleError(error: any): Promise<any> {
         console.error('Un error ha ocurrido', error);

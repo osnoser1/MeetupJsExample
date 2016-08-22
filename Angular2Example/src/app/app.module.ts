@@ -7,15 +7,17 @@ import { HttpModule }     from '@angular/http';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
-import { LibroDetallesComponent } from './libros/libro-detalles/libro-detalles.component';
-import { LibrosComponent } from './libros/libros.component';
-import { LibroService } from './libros/shared/libro.service';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LibrosComponent } from './libros/index';
+import { LibroDetallesComponent } from './libros/libro-detalles/index';
+import { LibroService } from './libros/shared/index';
+import { DashboardComponent } from './dashboard/index';
+import { LibroBusquedaComponent } from './libros/libro-busqueda/index';
 
 @NgModule({
     declarations: [
         AppComponent,
         LibrosComponent,
+        LibroBusquedaComponent,
         LibroDetallesComponent,
         DashboardComponent
     ],
